@@ -9,3 +9,9 @@ class CourseList(generics.ListAPIView):
     serializer_class = CourseSerializer
 
     # return Response(queryset.data)
+
+class CourseDetail(generics.RetrieveAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    lookup_field = 'id'
+    
