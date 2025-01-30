@@ -7,3 +7,8 @@ from rest_framework import generics
 class CurriculumList(generics.ListAPIView):
     queryset = Curriculum.objects.all()
     serializer_class = CurriculumSerializer
+
+class CurriculumDetail(generics.RetrieveAPIView):
+    queryset = Curriculum.objects.all()
+    serializer_class = CurriculumSerializer
+    lookup_field = 'id'
