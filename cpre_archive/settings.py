@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'course',
+    'curriculum',
     'rest_framework',  # DRF
 ]
 
