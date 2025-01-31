@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Course, CurriculumMapping
+from .models import Course
 
 
 # Register our model
 admin.site.register(Course)
-admin.site.register(CurriculumMapping)
