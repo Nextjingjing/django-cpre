@@ -32,3 +32,8 @@ class CurriculumMapping(models.Model):
 
     def __str__(self):
         return f"{self.curriculum.name} - {self.course.name}"
+    
+    # 🔹 ฟังก์ชันทดลอง: ดึงหลักสูตรที่วิชานี้อยู่
+    @classmethod
+    def get_curriculums_for_course(cls, course_id):
+        return Curriculum.objects.filter(curriculum_mappings__course=course_id)
