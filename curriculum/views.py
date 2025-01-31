@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .serializers import CurriculumSerializer
-from .models import Curriculum , CurriculumMapping
+from .models import Curriculum
 from rest_framework import generics
 from rest_framework.views import APIView
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -29,3 +30,14 @@ class CurriculumLatestView(APIView):
             for cm in courses
         ]
         return JsonResponse({"curriculum": last_curriculum.name, "courses": data}, safe=False)
+
+class CurriculumCoursesView(APIView):
+    """ 🔹 Get courses by curriculum ID """
+    def get(self, request, curriculum_id):
+        curriculum = get_object_or_404(Curriculum, id=curriculum_id)
+        courses = curriculum.curriculum_mappings.all()
+        data = [
+            {"id": cm.course.id, "name": cm.course.name, "year": cm.course.year, "term": cm.course.term}
+            for cm in courses
+        ]
+        return JsonResponse({"curriculum": curriculum.name, "courses": data}, safe=False)
