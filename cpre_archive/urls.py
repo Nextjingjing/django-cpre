@@ -23,6 +23,7 @@ urlpatterns = [
     # API สำหรับ courses & curriculums
     path('api/courses/', include('course.urls')),
     path('api/curriculums/', include('curriculum.urls')),
+    path('api/notes/', include('note.urls')),
 
     # dj-rest-auth Authentication API
     path('auth/', include('dj_rest_auth.urls')),

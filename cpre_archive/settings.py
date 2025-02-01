@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # แอปในโปรเจค
     'course',
     'curriculum',
+    'note',
 
     # Django Rest Framework
     'rest_framework',  # DRF
