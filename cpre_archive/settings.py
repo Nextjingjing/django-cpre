@@ -31,7 +31,38 @@ ALLOWED_HOSTS = []
 
 SITE_ID = 1
 
+# ใช้ SimpleJWT สำหรับ Token Authentication
+DJREST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'access_token',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh_token',
+}
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # ✅ ใช้ Email เป็นตัวล็อกอิน
+ACCOUNT_USERNAME_REQUIRED = False        # ✅ ไม่ต้องใช้ Username
+ACCOUNT_EMAIL_REQUIRED = True            # ✅ บังคับให้มี Email เสมอ
+ACCOUNT_EMAIL_VERIFICATION = "optional"  # ✅ (เลือกได้) ถ้าไม่ต้องการให้ verify email
+
+
+
 # Application definition
+# ✅ หรืออนุญาตเฉพาะ React ที่ http://localhost:3000
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+# ✅ ถ้าใช้ Credential เช่น JWT Token ให้เพิ่ม:
+CORS_ALLOW_CREDENTIALS = True
+
+# ✅ อนุญาตเฉพาะ Header ที่ต้องใช้
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'X-CSRFToken',
+]
+
+# ✅ เปิดให้ใช้ Methods ต่างๆ (GET, POST, PUT, DELETE)
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +71,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'corsheaders',
 
     # แอปในโปรเจค
     'course',
@@ -60,12 +93,15 @@ INSTALLED_APPS = [
     # dj-rest-auth (ถ้าใช้)
     'dj_rest_auth',  # API สำหรับ Authentication (Login, Register, Logout)
     'dj_rest_auth.registration',  # API สำหรับสมัครสมาชิก
+
+    'rest_framework_simplejwt',
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',  # ใช้ Token Auth
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
 
@@ -83,6 +119,7 @@ SOCIALACCOUNT_PROVIDERS = {
 GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI")
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ✅ เพิ่มตรงนี้
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
