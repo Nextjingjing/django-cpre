@@ -88,7 +88,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
 
     # dj-rest-auth (ถ้าใช้)
     'dj_rest_auth',  # API สำหรับ Authentication (Login, Register, Logout)

@@ -29,9 +29,6 @@ urlpatterns = [
     path('auth/', include('dj_rest_auth.urls')),
     path('auth/registration/', include('dj_rest_auth.registration.urls')),
 
-    # Google OAuth สำหรับหน้าเว็บ
-    path('auth/google/', include('allauth.socialaccount.urls')),
-
     # รองรับหน้าเว็บ Login/Signup ผ่าน allauth
     path('accounts/', include('allauth.urls')),
 ]

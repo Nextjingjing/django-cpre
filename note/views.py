@@ -22,6 +22,11 @@ class NoteListView(generics.ListAPIView):
 class CreateNoteView(APIView):
     """
     - **POST**: สร้าง Note (ต้องล็อกอิน)
+    {
+"name": "Example Note",
+"link": "https://www.example.com"
+    }
+
     """
     permission_classes = [IsAuthenticated]  # ✅ ต้องล็อกอินถึงจะสร้างได้
 
